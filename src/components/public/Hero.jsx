@@ -5,10 +5,7 @@ import { getSectionData } from '../../services/firestore';
 
 const Hero = () => {
   const defaultData = {
-    name: "John Doe",
-    title: "Full Stack Developer",
-    introduction: "I create beautiful and highly performant web applications with a focus on exceptional user experiences.",
-    profileImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop"
+
   };
 
   const [mockData, setMockData] = useState(defaultData);

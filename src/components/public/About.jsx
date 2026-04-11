@@ -7,34 +7,13 @@ const About = () => {
   const defaultMockData = {
     personalInfo: "Passionate software developer with a knack for turning complex problems into elegant, intuitive designs. I specialize in the React ecosystem and have a strong foundation in modern JavaScript and performance optimization.",
     education: [
-      {
-        institution: "University of Technology",
-        degree: "B.S. in Computer Science",
-        year: "2018 - 2022"
-      },
-      {
-        institution: "Code Bootcamp",
-        degree: "Full Stack Web Development",
-        year: "2023"
-      }
+    
     ],
     languages: [
-      { language: "English", proficiency: "Native" },
-      { language: "Spanish", proficiency: "Professional" }
+      
     ],
     experiences: [
-      {
-        role: "Software Developer Intern",
-        company: "Tech Solutions · Bangkok, Thailand",
-        timeline: "Oct 2022 - Mar 2023",
-        description: "- Built an internal AI workflow automation tool with React\n- Designed PostgreSQL schemas and REST APIs"
-      },
-      {
-        role: "Full Stack Developer",
-        company: "Startup Inc · Remote",
-        timeline: "Jun 2023 - Present",
-        description: "- Built production features with Svelte\n- Optimized LLM prompt logic for AI consistency"
-      }
+      
     ]
   };
 

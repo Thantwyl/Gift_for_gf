@@ -11,7 +11,6 @@ const ManageProjects = () => {
   const [editingId, setEditingId] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [githubLink, setGithubLink] = useState('');
   const [liveLink, setLiveLink] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [currentImageUrl, setCurrentImageUrl] = useState('');
@@ -32,7 +31,6 @@ const ManageProjects = () => {
     setEditingId(project.id);
     setTitle(project.title);
     setDescription(project.description);
-    setGithubLink(project.githubLink || '');
     setLiveLink(project.liveLink || '');
     setCurrentImageUrl(project.imageUrl);
     setImageFile(null);
@@ -42,7 +40,6 @@ const ManageProjects = () => {
     setEditingId(null);
     setTitle('');
     setDescription('');
-    setGithubLink('');
     setLiveLink('');
     setCurrentImageUrl('');
     setImageFile(null);
@@ -65,7 +62,6 @@ const ManageProjects = () => {
     const payload = {
       title,
       description,
-      githubLink,
       liveLink,
       imageUrl: finalImageUrl,
       updatedAt: new Date().toISOString()
@@ -123,12 +119,8 @@ const ManageProjects = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">GitHub Link (optional)</label>
-              <input value={githubLink} onChange={e=>setGithubLink(e.target.value)} type="url" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Live Demo Link (optional)</label>
-              <input value={liveLink} onChange={e=>setLiveLink(e.target.value)} type="url" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" />
+              <label className="block text-sm font-medium text-slate-300 mb-2">Resource Link (Drive or external) (optional)</label>
+              <input value={liveLink} onChange={e=>setLiveLink(e.target.value)} type="url" placeholder="https://drive.google.com/... or https://example.com/..." className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" />
             </div>
           </div>
           

@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { getCollectionData } from '../../services/firestore';
 
 const Projects = () => {
   const defaultProjects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-scale e-commerce application with dynamic routing, payment integration, and a custom content management system.",
-      imageUrl: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800&auto=format&fit=crop",
-      githubLink: "https://github.com",
-      liveLink: "https://example.com"
-    },
-    {
-      id: 2,
-      title: "Task Management SaaS",
-      description: "A collaborative workspace software for productive teams, featuring real-time updates and an intuitive drag-and-drop interface.",
-      imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
-      githubLink: "https://github.com",
-      liveLink: "https://example.com"
-    }
+
   ];
 
   const [mockProjects, setMockProjects] = useState(defaultProjects);
@@ -68,11 +53,6 @@ const Projects = () => {
                   {project.liveLink && (
                     <a href={project.liveLink} target="_blank" rel="noreferrer" className="p-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full hover:bg-primary dark:hover:bg-primary transition-colors">
                       <ExternalLink size={20} />
-                    </a>
-                  )}
-                  {project.githubLink && (
-                    <a href={project.githubLink} target="_blank" rel="noreferrer" className="p-3 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-white rounded-full hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
-                      <Github size={20} />
                     </a>
                   )}
                 </div>
