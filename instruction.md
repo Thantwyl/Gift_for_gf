@@ -9,11 +9,6 @@ The system must support full CRUD operations for all portfolio sections.
 
 ## 2. Design Concept
 - One-page scroll-based layout
-- Inspired by:
-  - https://kyawmyokhant.com/
-  - https://heinthuyawin-portfolio.vercel.app/
-  - https://thantwyl-portfolio.vercel.app/
-
 - Smooth scrolling between sections
 - Clean, modern, and professional UI
 

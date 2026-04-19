@@ -39,8 +39,8 @@ const Hero = () => {
             Welcome to my portfolio
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight transition-colors duration-500">
-            Hi, I'm <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-500 dark:to-indigo-400">
+            <span className="block">Hi, I'm</span>
+            <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-500 dark:to-indigo-400 whitespace-nowrap overflow-hidden text-4xl sm:text-5xl md:text-6xl max-w-[90vw]">
               {mockData.name}
             </span>
           </h1>

@@ -118,14 +118,15 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* LinkedIn Icon — aligned with Phone text start margin */}
-                {contact.socials?.linkedin && (
-                  <div className="flex items-center pl-[52px]">
-                    <a href={contact.socials.linkedin} target="_blank" rel="noreferrer" className="p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700">
-                      <Linkedin size={22} />
+                <div className="flex md:justify-start justify-start">
+                  {contact.socials?.linkedin && (
+                    <a
+                      href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700"
+                    >
+                      <Linkedin size={20} />
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
@@ -188,9 +189,9 @@ const Contact = () => {
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full bg-primary text-white dark:text-slate-900 font-bold text-base py-4 rounded-full hover:bg-teal-400 transition-all active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group mt-auto"
+                  className="w-full px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold hover:bg-teal-400 transition-all hover:scale-105 active:scale-95 shadow-md shadow-primary/20 flex items-center justify-center gap-2 group mt-auto"
                 >
-                  Send Message
+                  <span>Send Message</span>
                   <Send size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
