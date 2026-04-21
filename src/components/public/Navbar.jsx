@@ -173,7 +173,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
 
           <button
             onClick={() => setMobileOpen((s) => !s)}
-            className="p-2 rounded-md text-slate-700 dark:text-slate-200 bg-transparent focus:outline-none"
+            className={`rounded-xl p-2 lg:hidden transition text-slate-700 dark:text-slate-200 ${isDarkMode ? 'bg-white/10 backdrop-blur-md hover:bg-white/20' : 'bg-slate-100 hover:bg-slate-200'}`}
             aria-label="Toggle Menu"
           >
             {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
@@ -184,7 +184,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       </motion.nav>
 
       <AnimatePresence>
-          {mobileOpen && (
+        {mobileOpen && (
           <motion.div
             ref={mobileMenuRef}
             initial={{ height: 0, opacity: 0 }}
@@ -198,18 +198,20 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               top: navHeight ? `${navHeight}px` : undefined,
             }}
           >
-            <div className="px-6 pb-6 pt-4 space-y-3 flex flex-col items-start bg-white dark:bg-darkBase/95 border-b border-slate-200 dark:border-slate-800">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="flex items-center gap-3 text-base font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors"
-                >
-                  <link.Icon />
-                  <span>{link.name}</span>
-                </a>
-              ))}
+            <div className={`mb-4 rounded-2xl border p-4 lg:hidden backdrop-blur-md ${isDarkMode ? 'border-white/10 bg-slate-900/40' : 'border-slate-200 bg-white'}`}>
+              <div className="flex flex-col gap-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${isDarkMode ? 'text-white hover:bg-white/10' : 'text-slate-800 hover:bg-slate-100'}`}
+                  >
+                    <span className="text-primary"><link.Icon size={18} /></span>
+                    <span>{link.name}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}
