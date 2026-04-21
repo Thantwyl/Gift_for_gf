@@ -95,7 +95,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
           SHUNN<span className="text-primary">PORTFOLIO</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -140,7 +140,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         </div>
 
         {/* Mobile controls */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none"
@@ -184,14 +184,14 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       </motion.nav>
 
       <AnimatePresence>
-        {mobileOpen && (
+          {mobileOpen && (
           <motion.div
             ref={mobileMenuRef}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="md:hidden fixed left-0 right-0 z-40"
+            className="lg:hidden fixed left-0 right-0 z-40"
             style={{
               // ensure background matches navbar for visual continuity
               backdropFilter: 'blur(8px)',
