@@ -48,6 +48,36 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
     return () => window.removeEventListener('resize', calcHeights);
   }, [mobileOpen]);
 
+  const handleNavClick = (e, href) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const id = href.startsWith('#') ? href.slice(1) : null;
+
+    const doScroll = () => {
+      if (id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.location.hash = href;
+        }
+      } else {
+        window.location.href = href;
+      }
+    };
+
+    // If the mobile menu is open, close it first so layout stabilizes,
+    // then scroll after the close animation completes. Otherwise scroll immediately.
+    if (mobileOpen) {
+      setMobileOpen(false);
+      setTimeout(() => {
+        doScroll();
+      }, 260); // slightly longer than motion's 220ms to be safe
+    } else {
+      doScroll();
+      setMobileOpen(false);
+    }
+  };
+
   return (
     <>
       <motion.nav 
@@ -70,7 +100,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-transform transform hover:-translate-y-0.5"
             >
               <link.Icon className="text-slate-500 dark:text-slate-300" />
@@ -173,7 +203,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="flex items-center gap-3 text-base font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors"
                 >
                   <link.Icon />
