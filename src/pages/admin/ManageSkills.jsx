@@ -72,10 +72,10 @@ const ManageSkills = () => {
           {editingId ? 'Edit Skill' : 'Add New Skill'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Skill Name</label>
-              <input required value={name} onChange={e=>setName(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" placeholder="e.g. React.js" />
+              <input required value={name} onChange={e=>setName(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" placeholder="e.g. AutoCAD" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Proficiency ({level}%)</label>

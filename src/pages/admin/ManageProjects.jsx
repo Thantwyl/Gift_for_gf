@@ -98,7 +98,7 @@ const ManageProjects = () => {
           {editingId ? 'Edit Project' : 'Add New Project'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Title</label>
               <input required value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" />
@@ -117,7 +117,7 @@ const ManageProjects = () => {
             <textarea required value={description} onChange={e=>setDescription(e.target.value)} rows="3" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white"></textarea>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Resource Link (Drive or external) (optional)</label>
               <input value={liveLink} onChange={e=>setLiveLink(e.target.value)} type="url" placeholder="https://drive.google.com/... or https://example.com/..." className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white" />
@@ -136,7 +136,7 @@ const ManageProjects = () => {
       </div>
 
       {/* List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {projects.map((project) => (
           <div key={project.id} className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex flex-col">
             {project.imageUrl && (

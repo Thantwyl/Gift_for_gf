@@ -72,7 +72,7 @@ const ManageHero = () => {
       
       <form onSubmit={handleSave} className="space-y-6 bg-slate-800 rounded-2xl p-6 border border-slate-700">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Name</label>
             <input required value={name} onChange={e=>setName(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:outline-none" />

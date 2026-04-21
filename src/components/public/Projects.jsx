@@ -5,20 +5,7 @@ import { getCollectionData } from '../../services/firestore';
 
 const Projects = () => {
   const defaultProjects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-scale e-commerce application with dynamic routing, payment integration, and a custom content management system.",
-      imageUrl: "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800&auto=format&fit=crop",
-      liveLink: "https://example.com"
-    },
-    {
-      id: 2,
-      title: "Task Management SaaS",
-      description: "A collaborative workspace software for productive teams, featuring real-time updates and an intuitive drag-and-drop interface.",
-      imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
-      liveLink: "https://example.com"
-    }
+    
   ];
 
   const [mockProjects, setMockProjects] = useState(defaultProjects);

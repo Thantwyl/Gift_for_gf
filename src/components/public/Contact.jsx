@@ -5,11 +5,7 @@ import { getSectionData } from '../../services/firestore';
 
 const Contact = () => {
   const [contact, setContact] = useState({
-    email: 'hello@example.com',
-    phone: '+1 (555) 123-4567',
-    location: 'San Francisco, CA',
-    socials: { linkedin: '' },
-    whyWorkWithMe: ['', '', '', '']
+
   });
 
   useEffect(() => {

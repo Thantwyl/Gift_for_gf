@@ -29,7 +29,7 @@ const Login = () => {
     <div className="min-h-screen bg-darkBase flex items-center justify-center p-6 relative overflow-hidden">
       <div className="absolute top-[-20%] left-[-10%] w-96 h-96 bg-primary/20 rounded-full blur-[128px]"></div>
 
-      <div className="bg-slate-800 border border-slate-700 rounded-3xl p-8 md:p-12 w-full max-w-md relative z-10 shadow-2xl">
+      <div className="bg-slate-800 border border-slate-700 rounded-3xl p-8 lg:p-12 w-full max-w-md relative z-10 shadow-2xl">
         <div className="mb-10 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Admin Login</h1>
           <p className="text-slate-400">Sign in to manage your portfolio</p>

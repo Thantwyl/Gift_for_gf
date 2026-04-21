@@ -4,12 +4,7 @@ import { getCollectionData } from '../../services/firestore';
 
 const Skills = () => {
   const defaultSkills = [
-    { name: "React / React Native", level: 90 },
-    { name: "JavaScript (ES6+)", level: 85 },
-    { name: "TypeScript", level: 80 },
-    { name: "Tailwind CSS", level: 95 },
-    { name: "Node.js / Express", level: 75 },
-    { name: "Firebase / Firestore", level: 85 },
+    
   ];
 
   const [mockSkills, setMockSkills] = useState(defaultSkills);

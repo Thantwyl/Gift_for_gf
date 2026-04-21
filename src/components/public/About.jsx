@@ -5,7 +5,7 @@ import { getSectionData } from '../../services/firestore';
 const About = () => {
   // Mock data representing standard Firebase payload (used as a fallback)
   const defaultMockData = {
-    personalInfo: "Passionate software developer with a knack for turning complex problems into elegant, intuitive designs. I specialize in the React ecosystem and have a strong foundation in modern JavaScript and performance optimization.",
+    personalInfo: "",
     education: [
     
     ],
