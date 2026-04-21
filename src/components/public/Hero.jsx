@@ -54,8 +54,8 @@ const Hero = () => {
             <a href={mockData.cvUrl || "/cv.pdf"} target="_blank" rel="noreferrer" className="px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold hover:bg-teal-400 transition-all hover:scale-105 active:scale-95 shadow-md shadow-primary/20">
               Download CV
             </a>
-            <a href="#projects" className="px-8 py-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm shadow-slate-200 dark:shadow-none">
-              Explore Projects
+            <a href="#experience" className="px-8 py-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm shadow-slate-200 dark:shadow-none">
+              Explore Experience
             </a>
           </div>
 

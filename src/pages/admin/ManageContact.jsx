@@ -129,7 +129,7 @@ const ManageContact = () => {
                 value={sentence}
                 onChange={e => updateSentence(index, e.target.value)}
                 placeholder={
-                  index === 0 ? 'e.g. Proven track record of delivering projects on time' :
+                  index === 0 ? 'e.g. Proven track record of delivering experiences on time' :
                   index === 1 ? 'e.g. Strong communication and collaboration skills' :
                   index === 2 ? 'e.g. Passionate about clean, maintainable code' :
                   'e.g. Always learning and staying up-to-date with latest tech'

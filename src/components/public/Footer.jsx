@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Linkedin, ArrowUp } from 'lucide-react';
+import { Linkedin, ChevronUp } from 'lucide-react';
 import { getSectionData } from '../../services/firestore';
 
 const Footer = () => {
@@ -46,12 +46,12 @@ const Footer = () => {
               )}
             </div>
 
-            <a
+              <a
               href="#home"
               aria-label="Back to top"
               className="p-3 shadow-md shadow-slate-200 dark:shadow-lg rounded-full bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700"
             >
-              <ArrowUp size={18} />
+              <ChevronUp size={18} />
             </a>
           </div>
         </div>

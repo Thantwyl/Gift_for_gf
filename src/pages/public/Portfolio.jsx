@@ -4,7 +4,7 @@ import Navbar from '../../components/public/Navbar';
 import Hero from '../../components/public/Hero';
 import About from '../../components/public/About';
 import Skills from '../../components/public/Skills';
-import Projects from '../../components/public/Projects';
+import Experience from '../../components/public/Experience';
 import Contact from '../../components/public/Contact';
 import Footer from '../../components/public/Footer';
 
@@ -68,7 +68,7 @@ const Portfolio = () => {
           <Hero />
           <About />
           <Skills />
-          <Projects />
+          <Experience />
           <Contact />
         </main>
         
