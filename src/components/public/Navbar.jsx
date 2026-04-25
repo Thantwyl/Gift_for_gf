@@ -32,7 +32,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
     { name: 'Home', href: '#home', Icon: FiHome },
     { name: 'About', href: '#about', Icon: FiUser },
     { name: 'Skills', href: '#skills', Icon: FiStar },
-    { name: 'Experience', href: '#experience', Icon: FiBriefcase },
+    { name: 'Projects', href: '#projects', Icon: FiBriefcase },
     { name: 'Contact', href: '#contact', Icon: FiMail },
   ];
 

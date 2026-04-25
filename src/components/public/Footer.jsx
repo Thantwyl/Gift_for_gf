@@ -27,7 +27,7 @@ const Footer = () => {
               SHUNN<span className="text-primary"> PORTFOLIO</span>
             </a>
             <p className="text-slate-600 dark:text-slate-400 mt-2 max-w-sm text-sm">
-              Building polished, modern, and highly intuitive web experiences.
+              Turning measurements into meaning, and drawings into reality.
             </p>
           </div>
 

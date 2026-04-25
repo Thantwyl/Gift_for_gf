@@ -33,7 +33,7 @@ const Projects = () => {
           <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {mockProjects.map((item, index) => (
             <motion.div 
               key={item.id}

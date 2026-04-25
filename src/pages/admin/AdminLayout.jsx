@@ -8,7 +8,7 @@ import Login from './Login';
 import ManageHero from './ManageHero';
 import ManageAbout from './ManageAbout';
 import ManageSkills from './ManageSkills';
-import ManageExperience from './ManageExperience';
+import ManageProjects from './ManageProjects';
 import ManageContact from './ManageContact';
 
 const ProtectedRoute = ({ children, user }) => {
@@ -57,7 +57,7 @@ const AdminLayout = () => {
     { name: 'Hero Section', path: '/admin/hero', icon: <User size={20}/> },
     { name: 'About', path: '/admin/about', icon: <BookOpen size={20}/> },
     { name: 'Skills', path: '/admin/skills', icon: <Layers size={20}/> },
-    { name: 'Experience', path: '/admin/experience', icon: <Briefcase size={20}/> },
+    { name: 'Projects', path: '/admin/projects', icon: <Briefcase size={20}/> },
     { name: 'Contact', path: '/admin/contact', icon: <Mail size={20}/> },
   ];
 
@@ -113,7 +113,7 @@ const AdminLayout = () => {
               <Route path="/hero" element={<ManageHero />} />
               <Route path="/about" element={<ManageAbout />} />
               <Route path="/skills" element={<ManageSkills />} />
-              <Route path="/experience" element={<ManageExperience />} />
+              <Route path="/projects" element={<ManageProjects />} />
               <Route path="/contact" element={<ManageContact />} />
             </Routes>
           </div>

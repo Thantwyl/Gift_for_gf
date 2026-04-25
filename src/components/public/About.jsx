@@ -64,9 +64,11 @@ const About = () => {
               className="lg:col-span-2"
             >
               <h3 className="text-2xl font-semibold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6 transition-colors duration-500">Personal Info</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed transition-colors duration-500">
-                {mockData.personalInfo}
-              </p>
+              <div className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed transition-colors duration-500 space-y-4">
+                {mockData.personalInfo.split('\n').map((paragraph, idx) => (
+                  paragraph.trim() && <p key={idx}>{paragraph.trim()}</p>
+                ))}
+              </div>
             </motion.div>
 
             <motion.div 

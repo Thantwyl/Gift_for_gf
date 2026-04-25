@@ -3,8 +3,8 @@ import { getCollectionData, addCollectionItem, updateCollectionItem, deleteColle
 import { uploadImageToCloudinary } from '../../services/cloudinary';
 import { Loader2, Plus, Edit2, Trash2, Image as ImageIcon } from 'lucide-react';
 
-const ManageExperience = () => {
-  const [experiences, setExperiences] = useState([]);
+const ManageProjects = () => {
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   
   // Form State
@@ -22,17 +22,17 @@ const ManageExperience = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const data = await getCollectionData('experience');
-    setExperiences(data);
+    const data = await getCollectionData('projects');
+    setProjects(data);
     setLoading(false);
   };
 
-  const handleEdit = (experience) => {
-    setEditingId(experience.id);
-    setTitle(experience.title);
-    setDescription(experience.description);
-    setLiveLink(experience.liveLink || '');
-    setCurrentImageUrl(experience.imageUrl);
+  const handleEdit = (project) => {
+    setEditingId(project.id);
+    setTitle(project.title);
+    setDescription(project.description);
+    setLiveLink(project.liveLink || '');
+    setCurrentImageUrl(project.imageUrl);
     setImageFile(null);
   };
 
@@ -68,10 +68,10 @@ const ManageExperience = () => {
     };
 
     if (editingId) {
-      await updateCollectionItem('experience', editingId, payload);
+      await updateCollectionItem('projects', editingId, payload);
     } else {
       payload.createdAt = new Date().toISOString();
-      await addCollectionItem('experience', payload);
+      await addCollectionItem('projects', payload);
     }
     
     setUploading(false);
@@ -80,8 +80,8 @@ const ManageExperience = () => {
   };
 
   const handleDelete = async (id) => {
-    if(window.confirm('Are you sure you want to delete this experience?')) {
-      await deleteCollectionItem('experience', id);
+    if(window.confirm('Are you sure you want to delete this project?')) {
+      await deleteCollectionItem('projects', id);
       fetchData();
     }
   };
@@ -90,12 +90,12 @@ const ManageExperience = () => {
 
   return (
     <div className="max-w-4xl max-h-full">
-      <h1 className="text-3xl font-bold text-white mb-8">Manage Experience</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Manage Projects</h1>
       
       {/* Form */}
       <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700 mb-10">
         <h2 className="text-xl font-semibold text-white mb-6">
-          {editingId ? 'Edit Experience' : 'Add New Experience'}
+          {editingId ? 'Edit Project' : 'Add New Project'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -137,34 +137,33 @@ const ManageExperience = () => {
 
       {/* List */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {experiences.map((experience) => (
-          <div key={experience.id} className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex flex-col">
-            {experience.imageUrl && (
+        {projects.map((project) => (
+          <div key={project.id} className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex flex-col">
+            {project.imageUrl && (
               <div className="h-40 w-full overflow-hidden">
-                <img src={experience.imageUrl} alt={experience.title} className="w-full h-full object-cover" />
+                <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover" />
               </div>
             )}
             <div className="p-5 flex-1 flex flex-col bg-slate-800/80">
-              <h3 className="font-bold text-lg text-white mb-2">{experience.title}</h3>
-              <p className="text-slate-400 text-sm mb-4 line-clamp-2">{experience.description}</p>
-              
+              <h3 className="font-bold text-lg text-white mb-2">{project.title}</h3>
+              <p className="text-slate-400 text-sm mb-4 line-clamp-2">{project.description}</p>
               <div className="flex justify-end gap-2 mt-auto pt-4 border-t border-slate-700">
-                <button onClick={() => handleEdit(experience)} className="p-2 text-blue-400 hover:bg-blue-400/10 rounded-lg">
+                <button onClick={() => handleEdit(project)} className="p-2 text-blue-400 hover:bg-blue-400/10 rounded-lg">
                   <Edit2 size={18} />
                 </button>
-                <button onClick={() => handleDelete(experience.id)} className="p-2 text-red-400 hover:bg-red-400/10 rounded-lg">
+                <button onClick={() => handleDelete(project.id)} className="p-2 text-red-400 hover:bg-red-400/10 rounded-lg">
                   <Trash2 size={18} />
                 </button>
               </div>
             </div>
           </div>
         ))}
-        {experiences.length === 0 && (
-           <p className="text-slate-400 italic">No experience entries found. Add one above.</p>
+        {projects.length === 0 && (
+           <p className="text-slate-400 italic">No project entries found. Add one above.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default ManageExperience;
+export default ManageProjects;
