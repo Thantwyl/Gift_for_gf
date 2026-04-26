@@ -78,7 +78,7 @@ const Hero = () => {
           </div>
 
           <div className="pt-6 flex gap-4 justify-center lg:justify-start">
-            <a href={`mailto:${mockData.email}`} className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all md:hover:scale-110 border border-slate-200 dark:border-slate-700">
+            <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${mockData.email}`} target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all md:hover:scale-110 border border-slate-200 dark:border-slate-700">
               <Mail size={22} />
             </a>
             <a href={mockData.linkedin} target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all md:hover:scale-110 border border-slate-200 dark:border-slate-700">
