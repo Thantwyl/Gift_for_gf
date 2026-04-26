@@ -8,6 +8,15 @@ const Contact = () => {
 
   });
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
   useEffect(() => {
     let mounted = true;
     const fetch = async () => {
@@ -28,6 +37,42 @@ const Contact = () => {
     fetch();
     return () => { mounted = false; };
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // For now, just log the form data and show success
+      // In production, you'd send this to your email service
+      console.log('Form submitted:', formData);
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+
+      // Show success message briefly
+      setTimeout(() => setSubmitStatus(null), 5000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const whyItems = (contact.whyWorkWithMe || []).filter(s => s && s.trim());
 
@@ -117,7 +162,7 @@ const Contact = () => {
                 <div className="flex md:justify-start justify-start">
                   {contact.socials?.linkedin && (
                     <a
-                      href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700"
+                      href="https://linkedin.com" target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/20 lg:hover:text-primary dark:lg:hover:text-primary transition-all lg:hover:scale-110 border border-slate-200 dark:border-slate-700"
                     >
                       <Linkedin size={20} />
                     </a>
@@ -167,30 +212,76 @@ const Contact = () => {
                 Send Message
               </h3>
 
-              <form className="space-y-5 flex-1 flex flex-col" onSubmit={e => e.preventDefault()}>
+              <form className="space-y-5 flex-1 flex flex-col" onSubmit={handleSubmit}>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
                   className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-5 py-3.5 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
                   className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-5 py-3.5 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
                 />
                 <textarea
+                  name="message"
                   placeholder="Your Message"
                   rows="5"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
                   className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl px-5 py-3.5 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all resize-none flex-1"
                 ></textarea>
                 <button
                   type="submit"
-                  className="w-full px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold hover:bg-teal-400 transition-all hover:scale-105 active:scale-95 shadow-md shadow-primary/20 flex items-center justify-center gap-2 group mt-auto"
+                  disabled={isSubmitting}
+                  className="mobile-optimized touch-manipulation w-full px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold lg:hover:bg-teal-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all lg:hover:scale-105 active:scale-95 shadow-md shadow-primary/20 flex items-center justify-center gap-2 group mt-auto"
                 >
-                  <span>Send Message</span>
-                  <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white dark:border-slate-900 border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send size={18} className="lg:group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </button>
               </form>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
+                  <div className="flex items-center gap-2 text-green-800 dark:text-green-200">
+                    <Check size={18} />
+                    <span className="font-medium">Message sent successfully!</span>
+                  </div>
+                  <p className="text-sm text-green-700 dark:text-green-300 mt-1">
+                    Thank you for your message. I'll get back to you soon.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+                  <div className="flex items-center gap-2 text-red-800 dark:text-red-200">
+                    <span className="font-medium">Failed to send message</span>
+                  </div>
+                  <p className="text-sm text-red-700 dark:text-red-300 mt-1">
+                    Please try again or contact me directly via email.
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

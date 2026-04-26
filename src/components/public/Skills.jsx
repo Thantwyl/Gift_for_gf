@@ -29,7 +29,7 @@ const Skills = () => {
   
 
   return (
-    <section id="skills" className="py-24 px-6 relative">
+    <section id="skills" className="py-24 px-6 relative smooth-responsive">
       <div className="container mx-auto max-w-6xl">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -57,9 +57,9 @@ const Skills = () => {
               {hardSkills.map((skill, idx) => (
                 <div 
                   key={`hard-${idx}`} 
-                  className="w-full group bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 hover:scale-110 hover:bg-primary/10 dark:hover:bg-primary/10 hover:border-primary/50 shadow-sm dark:shadow-lg hover:shadow-primary/20 cursor-default"
+                  className="mobile-optimized w-full group bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 lg:hover:scale-110 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/10 lg:hover:border-primary/50 shadow-sm dark:shadow-lg lg:hover:shadow-primary/20 cursor-default"
                 >
-                  <span className="text-slate-700 dark:text-slate-200 font-medium text-lg group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{skill.name}</span>
+                  <span className="text-slate-700 dark:text-slate-200 font-medium text-lg lg:group-hover:text-slate-900 dark:lg:group-hover:text-white transition-colors">{skill.name}</span>
                 </div>
               ))}
             </div>
@@ -83,9 +83,9 @@ const Skills = () => {
               ).map((item, i) => (
                 <div
                   key={`soft-${i}`}
-                  className="w-full group bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 hover:scale-110 hover:bg-primary/10 dark:hover:bg-primary/10 hover:border-primary/50 shadow-sm dark:shadow-lg hover:shadow-primary/20 cursor-default"
+                  className="mobile-optimized w-full group bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 lg:hover:scale-110 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/10 lg:hover:border-primary/50 shadow-sm dark:shadow-lg lg:hover:shadow-primary/20 cursor-default"
                 >
-                  <span className="text-slate-700 dark:text-slate-200 font-medium text-lg group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{item.name}</span>
+                  <span className="text-slate-700 dark:text-slate-200 font-medium text-lg lg:group-hover:text-slate-900 dark:lg:group-hover:text-white transition-colors">{item.name}</span>
                 </div>
               ))}
             </div>

@@ -11,6 +11,8 @@ const ManageHero = () => {
   const [imageFile, setImageFile] = useState(null);
   const [currentCvUrl, setCurrentCvUrl] = useState('');
   const [cvFile, setCvFile] = useState(null);
+  const [email, setEmail] = useState('');
+  const [linkedin, setLinkedin] = useState('');
   
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -28,6 +30,8 @@ const ManageHero = () => {
       setIntroduction(data.introduction || '');
       setCurrentImageUrl(data.profileImageUrl || '');
       setCurrentCvUrl(data.cvUrl || '');
+      setEmail(data.email || '');
+      setLinkedin(data.linkedin || '');
     }
     setLoading(false);
   };
@@ -57,7 +61,9 @@ const ManageHero = () => {
       title,
       introduction,
       profileImageUrl: finalImageUrl,
-      cvUrl: finalCvUrl
+      cvUrl: finalCvUrl,
+      email,
+      linkedin
     });
     
     setSaving(false);
@@ -88,6 +94,17 @@ const ManageHero = () => {
           <textarea required rows="4" value={introduction} onChange={e=>setIntroduction(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:outline-none"></textarea>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+            <input type="email" required value={email} onChange={e=>setEmail(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:outline-none" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">LinkedIn URL</label>
+            <input type="url" required value={linkedin} onChange={e=>setLinkedin(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:outline-none" />
+          </div>
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">Profile Image</label>
           <div className="flex items-center gap-6 bg-slate-900 p-4 rounded-xl border border-slate-700">
@@ -101,13 +118,13 @@ const ManageHero = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Resume / CV Document (PDF)</label>
-          <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-xl border border-slate-700">
+          <label className="block text-sm font-medium text-slate-300 mb-2">Resume / CV Image (PNG)</label>
+          <div className="flex items-center gap-6 bg-slate-900 p-4 rounded-xl border border-slate-700">
             {currentCvUrl && !cvFile && (
-              <a href={currentCvUrl} target="_blank" rel="noreferrer" className="text-sm text-primary hover:underline font-medium px-4 py-2 bg-slate-800 rounded-lg">View Current CV</a>
+              <img src={currentCvUrl} alt="Current CV" className="w-16 h-16 object-cover border-2 border-indigo-500 rounded" />
             )}
             <div className="flex-1">
-              <input type="file" onChange={e=>setCvFile(e.target.files[0])} accept=".pdf,.doc,.docx" className="text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-500/20 file:text-indigo-400 hover:file:bg-indigo-500/30 w-full"/>
+              <input type="file" onChange={e=>setCvFile(e.target.files[0])} accept="image/png,image/jpeg,image/jpg" className="text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-500/20 file:text-indigo-400 hover:file:bg-indigo-500/30 w-full"/>
             </div>
           </div>
         </div>

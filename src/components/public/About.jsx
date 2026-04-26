@@ -41,7 +41,7 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-24 px-6 relative">
+    <section id="about" className="py-24 px-6 relative smooth-responsive">
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -103,9 +103,9 @@ const About = () => {
                 {mockData.languages.map((lang, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 hover:scale-110 hover:bg-primary/10 dark:hover:bg-primary/10 hover:border-primary/50 shadow-sm dark:shadow-lg hover:shadow-primary/20 cursor-default"
+                    className="mobile-optimized bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg flex items-center gap-4 transition-all duration-300 lg:hover:scale-110 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/10 lg:hover:border-primary/50 shadow-sm dark:shadow-lg lg:hover:shadow-primary/20 cursor-default"
                   >
-                    <span className="text-slate-700 dark:text-slate-200 font-medium text-lg group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{lang.language}</span>
+                    <span className="text-slate-700 dark:text-slate-200 font-medium text-lg lg:group-hover:text-slate-900 dark:lg:group-hover:text-white transition-colors">{lang.language}</span>
                     <span className="text-primary font-medium">{lang.proficiency}</span>
                   </div>
                 ))}
@@ -127,18 +127,18 @@ const About = () => {
                   {/* Left Side: Date / Timeline */}
                   <div className="md:w-48 shrink-0 md:text-left pt-1">
                     {exp.timeline && (
-                      <span className="text-sm font-semibold text-slate-500 dark:text-slate-400/80 uppercase tracking-widest block group-hover:text-primary transition-colors">
+                      <span className="text-sm font-semibold text-slate-500 dark:text-slate-400/80 uppercase tracking-widest block lg:group-hover:text-primary transition-colors">
                         {exp.timeline}
                       </span>
                     )}
                   </div>
                   
                   {/* Right Side: Vertical Line & Content */}
-                  <div className="relative flex-1 pl-6 md:pl-10 border-l-2 border-indigo-500/20 group-hover:border-indigo-500/60 transition-colors pb-4">
+                  <div className="relative flex-1 pl-6 md:pl-10 border-l-2 border-indigo-500/20 lg:group-hover:border-indigo-500/60 transition-colors pb-4">
                     {/* The timeline node dot */}
                     <div className="absolute w-4 h-4 bg-white dark:bg-slate-900 border-2 border-indigo-500 rounded-full -left-[9px] top-1.5 shadow-[0_0_10px_rgba(99,102,241,0.5)] transition-colors duration-500"></div>
                     
-                    <h4 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">{exp.role}</h4>
+                    <h4 className="text-xl font-bold text-slate-900 dark:text-white lg:group-hover:text-indigo-600 dark:lg:group-hover:text-indigo-300 transition-colors">{exp.role}</h4>
                     <p className="text-indigo-500 dark:text-indigo-400 font-medium my-2">{exp.company}</p>
                     <ul className="text-slate-600 dark:text-slate-400 text-base leading-relaxed space-y-2 mt-4 list-none transition-colors duration-500">
                       {exp.description.split('\n').map((line, i) => (

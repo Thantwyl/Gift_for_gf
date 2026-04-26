@@ -5,7 +5,13 @@ import { getSectionData } from '../../services/firestore';
 
 const Hero = () => {
   const defaultData = {
-
+    name: 'Your Name',
+    title: 'Your Title',
+    introduction: 'Your introduction here.',
+    profileImageUrl: '/default-profile.jpg',
+    cvUrl: null,
+    email: 'your.email@example.com',
+    linkedin: 'https://linkedin.com/in/yourprofile'
   };
 
   const [mockData, setMockData] = useState(defaultData);
@@ -19,15 +25,27 @@ const Hero = () => {
           title: liveData.title || defaultData.title,
           introduction: liveData.introduction || defaultData.introduction,
           profileImageUrl: liveData.profileImageUrl || defaultData.profileImageUrl,
-          cvUrl: liveData.cvUrl || null
+          cvUrl: liveData.cvUrl || null,
+          email: liveData.email || defaultData.email,
+          linkedin: liveData.linkedin || defaultData.linkedin
         });
       }
     };
     fetchHeroData();
   }, []);
 
+  const handleDownloadCV = () => {
+    if (!mockData.cvUrl) return;
+    const a = document.createElement('a');
+    a.href = mockData.cvUrl;
+    a.download = 'CV.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-20 pb-16 px-6">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 pb-16 px-6 smooth-responsive">
       <div className="container max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
@@ -51,19 +69,19 @@ const Hero = () => {
             {mockData.introduction}
           </p>
           <div className="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
-            <a href={mockData.cvUrl || "/cv.pdf"} target="_blank" rel="noreferrer" className="px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold hover:bg-teal-400 transition-all hover:scale-105 active:scale-95 shadow-md shadow-primary/20">
+            <button onClick={handleDownloadCV} className="mobile-optimized touch-manipulation px-8 py-3 rounded-full bg-primary text-white dark:text-slate-900 font-semibold hover:bg-teal-400 transition-all md:hover:scale-105 active:scale-95 shadow-md shadow-primary/20">
               Download CV
-            </a>
-            <a href="#projects" className="px-8 py-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm shadow-slate-200 dark:shadow-none">
+            </button>
+            <a href="#projects" className="mobile-optimized touch-manipulation px-8 py-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm shadow-slate-200 dark:shadow-none">
               Explore Projects
             </a>
           </div>
 
           <div className="pt-6 flex gap-4 justify-center lg:justify-start">
-            <a href="mailto:hello@example.com" className="p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700">
+            <a href={`mailto:${mockData.email}`} className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all md:hover:scale-110 border border-slate-200 dark:border-slate-700">
               <Mail size={22} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700">
+            <a href={mockData.linkedin} target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all md:hover:scale-110 border border-slate-200 dark:border-slate-700">
               <Linkedin size={22} />
             </a>
           </div>

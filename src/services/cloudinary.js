@@ -13,14 +13,14 @@ export const uploadImageToCloudinary = async (file) => {
   formData.append('upload_preset', uploadPreset);
 
   try {
-    // Using auto/upload allows both images and raw files like PDFs
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+    // Using image/upload for PNG and other image files
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
       method: 'POST',
       body: formData
     });
-    
+
     if (!response.ok) throw new Error("Upload failed");
-    
+
     const data = await response.json();
     return data.secure_url;
   } catch (error) {
