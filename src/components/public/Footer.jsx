@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Linkedin, ChevronUp } from 'lucide-react';
+import { Linkedin, ChevronUp, Mail } from 'lucide-react';
 import { getSectionData } from '../../services/firestore';
 
 const Footer = () => {
   const [linkedin, setLinkedin] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     let mounted = true;
     const fetch = async () => {
       const data = await getSectionData('contact');
-      if (mounted && data?.socials?.linkedin) setLinkedin(data.socials.linkedin);
+      if (mounted) {
+        if (data?.socials?.linkedin) setLinkedin(data.socials.linkedin);
+        if (data?.email) setEmail(data.email);
+      }
     };
     fetch();
     return () => { mounted = false; };
@@ -33,6 +37,17 @@ const Footer = () => {
 
           <div className="flex items-center gap-4">
             <div id="footer-socials" className="flex items-center gap-3">
+              {email && (
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Email"
+                  className="p-3 shadow-md shadow-slate-200 dark:shadow-lg rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary transition-all hover:scale-110 border border-slate-200 dark:border-slate-700"
+                >
+                  <Mail size={18} />
+                </a>
+              )}
               {linkedin && (
                 <a
                   href={linkedin}
