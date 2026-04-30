@@ -58,6 +58,11 @@ const Contact = () => {
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+      console.log('🔍 EmailJS Configuration Debug:');
+      console.log('Service ID:', serviceId);
+      console.log('Template ID:', templateId);
+      console.log('Public Key:', publicKey ? 'Present' : 'Missing');
+
       if (!serviceId || !templateId || !publicKey) {
         throw new Error('EmailJS configuration missing. Please set up your EmailJS account and add the environment variables.');
       }
@@ -71,8 +76,18 @@ const Contact = () => {
         reply_to: formData.email,
       };
 
+      console.log('📤 Sending email with params:', templateParams);
+
       // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      console.log('✅ EmailJS API Response:', result);
+
+      // Additional verification - check if email was actually queued
+      if (result.status === 200 && result.text === 'OK') {
+        console.log('✅ Email successfully queued for delivery');
+      } else {
+        console.warn('⚠️ EmailJS returned unexpected response:', result);
+      }
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
@@ -81,7 +96,12 @@ const Contact = () => {
       setTimeout(() => setSubmitStatus(null), 5000);
 
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('❌ Error submitting form:', error);
+      console.error('Error details:', {
+        message: error.message,
+        status: error.status,
+        text: error.text
+      });
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {

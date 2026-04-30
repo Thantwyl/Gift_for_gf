@@ -56,6 +56,10 @@ const ManageProjects = () => {
       const uploadedUrl = await uploadImageToCloudinary(imageFile);
       if (uploadedUrl) {
         finalImageUrl = uploadedUrl;
+      } else {
+        alert('Image upload failed. Please check your Cloudinary configuration.');
+        setUploading(false);
+        return;
       }
     }
 
