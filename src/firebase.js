@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,3 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// Configure authentication persistence
+// browserSessionPersistence: Auth state persists until tab is closed
+// browserLocalPersistence: Auth state persists until explicitly signed out
+setPersistence(auth, browserSessionPersistence).catch((error) => {
+  console.error("Auth persistence error:", error);
+});

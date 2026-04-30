@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, Check, Send } from 'lucide-react';
 import { getSectionData } from '../../services/firestore';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [contact, setContact] = useState({
@@ -52,12 +53,26 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // For now, just log the form data and show success
-      // In production, you'd send this to your email service
-      console.log('Form submitted:', formData);
+      // EmailJS configuration - you'll need to set these up
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration missing. Please set up your EmailJS account and add the environment variables.');
+      }
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Portfolio Owner', // You can customize this
+        reply_to: formData.email,
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
@@ -162,7 +177,7 @@ const Contact = () => {
                 <div className="flex md:justify-start justify-start">
                   {contact.socials?.linkedin && (
                     <a
-                      href="https://linkedin.com" target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/20 lg:hover:text-primary dark:lg:hover:text-primary transition-all lg:hover:scale-110 border border-slate-200 dark:border-slate-700"
+                      href={contact.socials.linkedin} target="_blank" rel="noreferrer" className="mobile-optimized touch-manipulation p-3 shadow-md shadow-slate-200 dark:shadow-lg dark:shadow-none rounded-full bg-white dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 lg:hover:bg-primary/10 dark:lg:hover:bg-primary/20 lg:hover:text-primary dark:lg:hover:text-primary transition-all lg:hover:scale-110 border border-slate-200 dark:border-slate-700"
                     >
                       <Linkedin size={20} />
                     </a>

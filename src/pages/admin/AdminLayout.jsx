@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, Navigate, useNavigate, Link, useLocation } from 'react-router-dom';
-import { auth } from '../../firebase';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { LayoutDashboard, User, BookOpen, Layers, Briefcase, Mail, LogOut, Loader2 } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { LayoutDashboard, User, BookOpen, Layers, Briefcase, Mail, LogOut, Shield } from 'lucide-react';
 
 import Login from './Login';
 import ManageHero from './ManageHero';
@@ -11,45 +10,56 @@ import ManageSkills from './ManageSkills';
 import ManageProjects from './ManageProjects';
 import ManageContact from './ManageContact';
 
-const ProtectedRoute = ({ children, user }) => {
-  if (!user) return <Navigate to="/admin/login" replace />;
-  return children;
-};
-
-const AdminLayout = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/admin/login');
-    } catch (error) {
-      console.error("Logout error", error);
-    }
-  };
-
+const ProtectedRoute = ({ children, isAuthenticated, loading }) => {
+  // Show loading spinner while checking authentication
   if (loading) {
     return (
       <div className="min-h-screen bg-darkBase flex items-center justify-center">
-        <Loader2 className="animate-spin text-primary w-12 h-12" />
+        <div className="text-center">
+          <Shield className="animate-pulse text-primary w-12 h-12 mx-auto mb-4" />
+          <p className="text-slate-400">Verifying authentication...</p>
+        </div>
       </div>
     );
   }
 
+  // Redirect to login if not authenticated
+  if (!isAuthenticated) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  return children;
+};
+
+const AdminLayout = () => {
+  const { user, loading, isAuthenticated, logout, validateSession } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Additional security check: validate authentication on route changes
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (isAuthenticated) {
+        const sessionValid = await validateSession();
+        if (!sessionValid) {
+          navigate('/admin/login', { replace: true });
+        }
+      }
+    };
+
+    if (!loading) {
+      checkAuth();
+    }
+  }, [location.pathname, isAuthenticated, loading, validateSession, navigate]);
+
   // If on login page, render that solely
   if (location.pathname === '/admin/login') {
-    return user ? <Navigate to="/admin" replace /> : <Login />;
+    return isAuthenticated ? <Navigate to="/admin" replace /> : <Login />;
+  }
+
+  // Additional security: redirect if not authenticated
+  if (!isAuthenticated && !loading) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   const navItems = [
@@ -62,7 +72,7 @@ const AdminLayout = () => {
   ];
 
   return (
-    <ProtectedRoute user={user}>
+    <ProtectedRoute isAuthenticated={isAuthenticated} loading={loading}>
       <div className="min-h-screen bg-slate-900 flex text-slate-200">
         {/* Sidebar */}
         <aside className="w-64 bg-slate-800 border-r border-slate-700 flex flex-col hidden md:flex">
@@ -86,8 +96,8 @@ const AdminLayout = () => {
             ))}
           </nav>
           <div className="p-4 border-t border-slate-700">
-            <button 
-              onClick={handleLogout}
+            <button
+              onClick={logout}
               className="flex items-center gap-3 w-full px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
             >
               <LogOut size={20} />
@@ -100,7 +110,7 @@ const AdminLayout = () => {
         <main className="flex-1 bg-slate-900 flex flex-col h-screen overflow-hidden">
           <header className="bg-slate-800 border-b border-slate-700 px-8 py-4 flex items-center justify-between md:hidden">
             <h2 className="text-xl font-bold text-white">Admin</h2>
-            <button onClick={handleLogout} className="text-red-400"><LogOut size={20}/></button>
+            <button onClick={logout} className="text-red-400"><LogOut size={20}/></button>
           </header>
           <div className="flex-1 p-8 overflow-y-auto">
             <Routes>
